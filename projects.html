@@ -1,0 +1,56 @@
+<!-- projects.html -->
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Projects</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"> 
+    <meta http-equiv="expires" content="0"> 
+    <meta http-equiv="pragma" content="no-cache">
+    
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header><a href="index.html">Yousef Maitah</a></header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="coursework.html">Coursework</a>
+        <a href="projects.html">Projects</a>
+        <a href="./static/YousefMaitahResumeNv1.pdf" target="_blank" rel="noreferrer noopener">Resume</a> 
+        <a href="other.html">Other</a>
+    </nav>
+    <main>
+        <section id="computer-architecture">
+            <h2>Out-of-Order RISC-V Processor (SystemVerilog)</h2>
+            <p><strong>EECS 470: Computer Architecture Senior Design</strong> | <em>Fall 2025</em></p>
+            
+            <p>Collaborated on a 5-person team to design and implement a fully synthesizable, N-way superscalar R10K-style out-of-order processor for the RISC-V ISA. My primary contributions included the development and optimization of the Branch Predictor, Free List, Return Address Stack (RAS), as well as testbenching and debugging.</p>
+
+            <div class="project-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
+                
+                <div style="width: 100%; max-width: 60%;">
+                    <h3>Key Architectural Features:</h3>
+                    <ul class="hyphen-list">
+                        <li><strong>N-way Superscalar Execution:</strong> Parameterized design allowing multiple instructions to be fetched, issued, and retired per cycle (configured to N=3 for optimal CPI).</li>
+                        <li><strong>Palacharla Reservation Station:</strong> Implemented dependency-based FIFO queues to improve issue logic speed and scalability.</li>
+                        <li><strong>Advanced Branch Prediction:</strong> Integrated a Tournament Predictor (dynamically selecting between PAg and GShare) alongside a 64-entry BTB and a 16-entry Return Address Stack (RAS).</li>
+                        <li><strong>Early Tag Broadcast:</strong> Reduced the wakeup critical path by broadcasting destination tags one cycle before value generation, allowing overlapped wakeup and execution.</li>
+                        <li><strong>Memory Hierarchy:</strong> Developed non-blocking, multi-banked instruction and data caches with a writeback buffer, supporting out-of-order load issues and byte-level store-to-load forwarding.</li>
+                    </ul>
+                    <p style="margin-top: 20px;">
+                        <a href="static/EECS_470_Final_Project_Report.pdf" target="_blank" rel="noreferrer noopener" style="display: inline-block; padding: 10px 15px; background-color: #155da1; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s;">
+                            📄 Read the Full Report
+                        </a>
+                    </p>
+                </div>
+
+                <div style="width: 100%; max-width: 35%; text-align: center;">
+                    <img src="static/img/processor_diagram.png" alt="Processor Dataflow Overview" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <p style="font-size: 12px; color: #555;"><em>High-level overview of the processor data flow.</em></p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+</body></html>
