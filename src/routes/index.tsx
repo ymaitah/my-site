@@ -19,13 +19,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Yousef Maitah — Electrical Engineer" },
+      { title: "Yousef Maitah - Electrical Engineer" },
       {
         name: "description",
         content:
-          "Yousef Maitah — Electrical Engineering at Michigan. Driveline mechatronics, embedded systems, and processor design.",
+          "Yousef Maitah - Electrical Engineering at Michigan. Driveline mechatronics, embedded systems, and processor design.",
       },
-      { property: "og:title", content: "Yousef Maitah — Electrical Engineer" },
+      { property: "og:title", content: "Yousef Maitah - Electrical Engineer" },
       {
         property: "og:description",
         content:
@@ -147,18 +147,18 @@ function Hero() {
 const experiences = [
   {
     company: "General Motors",
-    role: "Engineering Intern — Driveline Development & Integration",
+    role: "Engineering Intern - Driveline Development & Integration",
     location: "Milford, MI",
     period: "May 2025 – Aug 2025",
     bullets: [
       "Supported driveline mechatronics and controls integration on the D2-2 AWD system (Chevy Equinox / GMC Terrain), investigating warranty and resolving system performance and software issues.",
-      "Conducted on-road and off-road data collection for wheel torque and driveline dynamics — including −40°C cold-box and sand-dune terrain testing.",
+      "Conducted on-road and off-road data collection for wheel torque and driveline dynamics - including −40°C cold-box and sand-dune terrain testing.",
       "Collaborated cross-functionally with technical specialists, DREs, and suppliers to assess halfshaft NVH characteristics.",
     ],
   },
   {
     company: "Nexteer Automotive",
-    role: "Engineering Intern — Systems Application Team",
+    role: "Engineering Intern - Systems Application Team",
     location: "Saginaw, MI",
     period: "May 2024 – Aug 2024",
     bullets: [
@@ -169,7 +169,7 @@ const experiences = [
   },
   {
     company: "Nexteer Automotive",
-    role: "Engineering Intern — ECU HiL Team",
+    role: "Engineering Intern - ECU HiL Team",
     location: "Auburn Hills, MI",
     period: "May 2023 – Aug 2023",
     bullets: [
@@ -201,11 +201,11 @@ function Experience() {
               </div>
               <div className="md:col-span-9">
                 <h3 className="font-display text-2xl md:text-3xl tracking-tight">
-                  {e.role.split("—")[0].trim()}
+                  {e.role.split("-")[0].trim()}
                   <span className="text-amber"> @ {e.company}</span>
                 </h3>
                 <p className="font-mono text-xs text-muted-foreground mt-1">
-                  {e.role.split("—")[1]?.trim()}
+                  {e.role.split("-")[1]?.trim()}
                 </p>
                 <ul className="mt-5 space-y-3 text-muted-foreground leading-relaxed">
                   {e.bullets.map((b, j) => (
@@ -237,14 +237,14 @@ const projects = [
     tag: "C · ESP32 · IoT",
     period: "Oct – Dec 2025",
     icon: CircuitBoard,
-    desc: "An IoT room-occupancy sensor combining Time-of-Flight and PIR sensors for direction tracking. Wireless transmission to a central server for live monitoring — 90% detection accuracy.",
+    desc: "An IoT room-occupancy sensor combining Time-of-Flight and PIR sensors for direction tracking. Wireless transmission to a central server for live monitoring - 90% detection accuracy.",
   },
   {
     title: "Maglev PID Controller",
     tag: "MATLAB · Simulink",
     period: "Mar – Apr 2025",
     icon: Wrench,
-    desc: "A PID controller built on a linearized model of a nonlinear magnetic-levitation plant. Validated with hardware-in-the-loop testing — sub-3-second settling time and zero steady-state error.",
+    desc: "A PID controller built on a linearized model of a nonlinear magnetic-levitation plant. Validated with hardware-in-the-loop testing - sub-3-second settling time and zero steady-state error.",
   },
 ];
 
@@ -350,7 +350,7 @@ function Contact() {
     <section id="contact" className="border-t border-border/50 bg-card/30">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-40">
         <motion.div {...fadeUp}>
-          <div className="font-mono text-xs text-amber mb-6">04 — GET IN TOUCH</div>
+          <div className="font-mono text-xs text-amber mb-6">04 - GET IN TOUCH</div>
           <h2 className="font-display text-5xl md:text-7xl tracking-tight leading-[0.95]">
             Let's build something
             <br />
