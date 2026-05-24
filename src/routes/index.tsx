@@ -13,6 +13,7 @@ import {
   ArrowUpRight,
   Linkedin,
   Github,
+  FileText,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -59,9 +60,11 @@ function Index() {
     <main className="min-h-screen">
       <Nav />
       <Hero />
+      <Education />
       <Experience />
       <Projects />
       <Skills />
+      <Classes />
       <Contact />
       <Footer />
     </main>
@@ -79,6 +82,7 @@ function Nav() {
           <a href="#experience" className="hover:text-foreground transition">experience</a>
           <a href="#projects" className="hover:text-foreground transition">projects</a>
           <a href="#skills" className="hover:text-foreground transition">skills</a>
+          <a href="#classes" className="hover:text-foreground transition">classes</a>
           <a href="#contact" className="hover:text-foreground transition">contact</a>
         </nav>
         <a
@@ -180,6 +184,30 @@ const experiences = [
   },
 ];
 
+function Education() {
+  return (
+    <section id="education" className="border-t border-border/50 bg-card/30">
+      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <motion.div
+          {...fadeUp}
+          className="panel rounded-xl p-8 flex flex-col md:flex-row md:items-center gap-6"
+        >
+          <GraduationCap className="w-10 h-10 text-amber shrink-0" strokeWidth={1.5} />
+          <div className="flex-1">
+            <h3 className="font-display text-2xl">University of Michigan</h3>
+            <p className="text-muted-foreground mt-1">
+              B.S. in Electrical Engineering · GPA 3.7 / 4.0 · Aug 2021 – Dec 2025
+            </p>
+            <p className="font-mono text-xs text-muted-foreground mt-3">
+              James B. Angell Scholar · Dean's List · University Honors
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Experience() {
   return (
     <section id="experience" className="border-t border-border/50">
@@ -246,6 +274,32 @@ const projects = [
     icon: Wrench,
     desc: "A PID controller built on a linearized model of a nonlinear magnetic-levitation plant. Validated with hardware-in-the-loop testing - sub-3-second settling time and zero steady-state error.",
   },
+];
+
+const resume = {
+  filename: "YousefMaitahResumeNv2.pdf",
+  title: "Yousef Maitah Resume",
+};
+
+const classes = [
+  { name: "EECS 183", title: "Elementary Programming Concepts" },
+  { name: "EECS 200", title: "Electrical Engineering Systems Design I" },
+  { name: "EECS 201", title: "Computer Science Pragmatics" },
+  { name: "EECS 215", title: "Introduction to Electrical Circuits" },
+  { name: "EECS 216", title: "Introduction to Signals and Systems" },
+  { name: "EECS 230", title: "Engineering Electromagnetics" },
+  { name: "EECS 250", title: "Electrical Sensing Systems" },
+  { name: "EECS 270", title: "Introduction to Logic Design" },
+  { name: "EECS 280", title: "Programming and Data Structures" },
+  { name: "EECS 300", title: "Electrical Engineering Systems Design II" },
+  { name: "EECS 301", title: "Probabilistic Methods in Engineering" },
+  { name: "EECS 312", title: "Digital Integrated Circuits" },
+  { name: "EECS 320", title: "Introduction to Semiconductor Devices" },
+  { name: "EECS 370", title: "Introduction to Computer Organization" },
+  { name: "EECS 428", title: "Quantum Nanotechnology" },
+  { name: "EECS 460", title: "Control Systems Analysis and Design" },
+  { name: "EECS 470", title: "Computer Architecture" },
+  { name: "EECS 496", title: "Major Design Experience-Professionalism" },
 ];
 
 function Projects() {
@@ -318,22 +372,33 @@ function Skills() {
             </motion.div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <motion.div
-          {...fadeUp}
-          className="mt-20 panel rounded-xl p-8 flex flex-col md:flex-row md:items-center gap-6"
-        >
-          <GraduationCap className="w-10 h-10 text-amber shrink-0" strokeWidth={1.5} />
-          <div className="flex-1">
-            <h3 className="font-display text-2xl">University of Michigan</h3>
-            <p className="text-muted-foreground mt-1">
-              B.S. in Electrical Engineering · GPA 3.7 / 4.0 · Aug 2021 – Dec 2025
-            </p>
-            <p className="font-mono text-xs text-muted-foreground mt-3">
-              James B. Angell Scholar · Dean's List · University Honors
-            </p>
-          </div>
-        </motion.div>
+function Classes() {
+  return (
+    <section id="classes" className="border-t border-border/50">
+      <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <SectionHeader index="04" title="Coursework" />
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {classes.map((c, i) => (
+            <motion.div
+              key={i}
+              {...fadeUp}
+              transition={{ duration: 0.5, delay: i * 0.02 }}
+              className="panel rounded-lg p-5 hover:border-amber/50 transition group"
+            >
+              <div className="font-mono text-xs text-amber font-semibold tracking-wider">
+                {c.name}
+              </div>
+              <p className="text-sm text-muted-foreground mt-2 group-hover:text-foreground transition">
+                {c.title}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -350,7 +415,7 @@ function Contact() {
     <section id="contact" className="border-t border-border/50 bg-card/30">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-40">
         <motion.div {...fadeUp}>
-          <div className="font-mono text-xs text-amber mb-6">04 - GET IN TOUCH</div>
+          <div className="font-mono text-xs text-amber mb-6">05 - GET IN TOUCH</div>
           <h2 className="font-display text-5xl md:text-7xl tracking-tight leading-[0.95]">
             Let's build something
             <br />
@@ -379,6 +444,20 @@ function Contact() {
               </motion.a>
             );
           })}
+          <motion.a
+            {...fadeUp}
+            transition={{ duration: 0.5, delay: links.length * 0.05 }}
+            href={`/${resume.filename}`}
+            target="_blank"
+            rel="noreferrer"
+            className="group panel rounded-lg p-6 flex items-center justify-between hover:border-amber/50 transition"
+          >
+            <div className="flex items-center gap-4">
+              <FileText className="w-5 h-5 text-amber" strokeWidth={1.5} />
+              <span className="font-mono text-sm">View Resume</span>
+            </div>
+            <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-amber group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition" />
+          </motion.a>
         </div>
       </div>
     </section>
