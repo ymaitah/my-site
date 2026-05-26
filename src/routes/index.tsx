@@ -259,6 +259,7 @@ const projects = [
     period: "Oct – Dec 2025",
     icon: Cpu,
     desc: "A fully synthesizable N-way superscalar out-of-order processor with instruction prefetching and early branch resolution. MIPS R10000-style microarchitecture with register renaming.",
+    report: "/EECS_470_Final_Project_Report.pdf",
   },
   {
     title: "Smart Room Occupancy Monitoring",
@@ -266,6 +267,7 @@ const projects = [
     period: "Oct – Dec 2025",
     icon: CircuitBoard,
     desc: "An IoT room-occupancy sensor combining Time-of-Flight and PIR sensors for direction tracking. Wireless transmission to a central server for live monitoring - 90% detection accuracy.",
+    report: "/Final Paper Team 2.pdf",
   },
   {
     title: "Maglev PID Controller",
@@ -273,6 +275,7 @@ const projects = [
     period: "Mar – Apr 2025",
     icon: Wrench,
     desc: "A PID controller built on a linearized model of a nonlinear magnetic-levitation plant. Validated with hardware-in-the-loop testing - sub-3-second settling time and zero steady-state error.",
+    report: "/MAGLEV_Report.pdf",
   },
 ];
 
@@ -311,10 +314,14 @@ function Projects() {
           {projects.map((p, i) => {
             const Icon = p.icon;
             return (
-              <motion.div
+              <motion.a
                 key={i}
                 {...fadeUp}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
+                href={p.report}
+                target="_blank"
+                rel="noreferrer"
+                title={`View report for ${p.title}`}
                 className="panel rounded-xl p-7 group hover:border-amber/40 transition-colors relative overflow-hidden"
               >
                 <div className="absolute -right-12 -top-12 w-40 h-40 rounded-full bg-amber/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -326,8 +333,9 @@ function Projects() {
                   <h3 className="font-display text-2xl mt-2 leading-tight">{p.title}</h3>
                   <div className="font-mono text-xs text-amber mt-2">{p.tag}</div>
                   <p className="text-muted-foreground text-sm mt-4 leading-relaxed">{p.desc}</p>
+                  <div className="font-mono text-[11px] text-muted-foreground/70 mt-4">Click to open the full report in a new tab.</div>
                 </div>
-              </motion.div>
+              </motion.a>
             );
           })}
         </div>
