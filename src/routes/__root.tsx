@@ -1,4 +1,10 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+  Outlet,
+  Link,
+  createRootRoute,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 
@@ -7,7 +13,9 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Page not found
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
@@ -24,13 +32,43 @@ function NotFoundComponent() {
   );
 }
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Yousef Maitah",
+  url: "https://yousefmaitah.com",
+  image: "https://yousefmaitah.com/og-image.png",
+  jobTitle: "Virtual Propulsion Engineer",
+  worksFor: { "@type": "Organization", name: "General Motors" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "University of Michigan" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ann Arbor",
+    addressRegion: "MI",
+  },
+  sameAs: [
+    "https://linkedin.com/in/yousef-maitah/",
+    "https://github.com/ymaitah",
+  ],
+};
+
 export const Route = createRootRoute({
   head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+      { name: "theme-color", content: "#14161b" },
+    ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       {
-        rel: "stylesheet",
-        href: appCss,
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32.png",
       },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
   shellComponent: RootShell,
@@ -43,6 +81,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body>
         {children}
