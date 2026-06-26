@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import yousefPortrait from "@/assets/yousef.png";
 import {
   Mail,
-  Phone,
   MapPin,
   Cpu,
   CircuitBoard,
@@ -14,7 +13,17 @@ import {
   Linkedin,
   Github,
   FileText,
+  Menu,
 } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+  SheetTitle,
+} from "@/components/ui/sheet";
+
+const SITE_URL = "https://yousefmaitah.com";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -24,15 +33,27 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Yousef Maitah - Electrical Engineering at Michigan. Driveline mechatronics, embedded systems, and processor design.",
+          "Yousef Maitah - Electrical Engineer at General Motors and Michigan EE grad. Driveline mechatronics, embedded systems, and processor design.",
       },
       { property: "og:title", content: "Yousef Maitah - Electrical Engineer" },
       {
         property: "og:description",
         content:
-          "Portfolio of Yousef Maitah: GM driveline integration, RISC-V design, embedded IoT, and control systems.",
+          "Portfolio of Yousef Maitah: GM propulsion engineering, RISC-V design, embedded IoT, and control systems.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Yousef Maitah - Electrical Engineer" },
+      {
+        name: "twitter:description",
+        content:
+          "Portfolio of Yousef Maitah: GM propulsion engineering, RISC-V design, embedded IoT, and control systems.",
+      },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
+    links: [{ rel: "canonical", href: SITE_URL }],
   }),
 });
 
@@ -60,6 +81,7 @@ function Index() {
     <main className="min-h-screen">
       <Nav />
       <Hero />
+      <About />
       <Education />
       <Experience />
       <Projects />
@@ -71,7 +93,17 @@ function Index() {
   );
 }
 
+const navLinks = [
+  { href: "#about", label: "about" },
+  { href: "#experience", label: "experience" },
+  { href: "#projects", label: "projects" },
+  { href: "#skills", label: "skills" },
+  { href: "#classes", label: "classes" },
+  { href: "#contact", label: "contact" },
+];
+
 function Nav() {
+  const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 backdrop-blur-xl bg-background/70">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -79,18 +111,59 @@ function Nav() {
           <span className="text-amber">/</span>ymaitah
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm font-mono text-muted-foreground">
-          <a href="#experience" className="hover:text-foreground transition">experience</a>
-          <a href="#projects" className="hover:text-foreground transition">projects</a>
-          <a href="#skills" className="hover:text-foreground transition">skills</a>
-          <a href="#classes" className="hover:text-foreground transition">classes</a>
-          <a href="#contact" className="hover:text-foreground transition">contact</a>
+          {navLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="hover:text-foreground transition"
+            >
+              {l.label}
+            </a>
+          ))}
         </nav>
-        <a
-          href="mailto:yousefm@umich.edu"
-          className="text-sm font-mono px-4 py-2 border border-border rounded-md hover:bg-accent hover:text-accent-foreground transition"
-        >
-          say hi →
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="mailto:yousefm@umich.edu"
+            className="hidden sm:inline-flex text-sm font-mono px-4 py-2 border border-border rounded-md hover:bg-accent hover:text-accent-foreground transition"
+          >
+            say hi →
+          </a>
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                aria-label="Open menu"
+                className="md:hidden inline-flex items-center justify-center h-10 w-10 -mr-2 rounded-md text-muted-foreground hover:text-foreground transition"
+              >
+                <Menu className="h-5 w-5" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72">
+              <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+              <nav className="mt-10 flex flex-col gap-1 font-mono text-base">
+                {navLinks.map((l) => (
+                  <SheetClose asChild key={l.href}>
+                    <a
+                      href={l.href}
+                      className="py-3 px-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition"
+                    >
+                      <span className="text-amber">/</span>
+                      {l.label}
+                    </a>
+                  </SheetClose>
+                ))}
+                <SheetClose asChild>
+                  <a
+                    href="mailto:yousefm@umich.edu"
+                    className="mt-4 py-3 px-2 rounded-md border border-border text-center hover:bg-accent hover:text-accent-foreground transition"
+                  >
+                    say hi →
+                  </a>
+                </SheetClose>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );
@@ -111,7 +184,10 @@ function Hero() {
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-32 md:pt-40 md:pb-48">
-        <motion.div {...fadeUpImmediate} className="font-mono text-xs text-amber mb-8 flex items-center gap-3">
+        <motion.div
+          {...fadeUpImmediate}
+          className="font-mono text-xs text-amber mb-8 flex items-center gap-3"
+        >
           <span className="h-px w-10 bg-amber" />
           ELECTRICAL ENGINEER · ANN ARBOR, MI
         </motion.div>
@@ -139,10 +215,73 @@ function Hero() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="mt-12 flex flex-wrap gap-3 font-mono text-xs"
         >
-          {["Mechatronics", "Embedded", "FPGA / RTL", "Control Systems"].map((t) => (
-            <span key={t} className="px-3 py-1.5 panel rounded-full">{t}</span>
-          ))}
+          {["Mechatronics", "Embedded", "FPGA / RTL", "Control Systems"].map(
+            (t) => (
+              <span key={t} className="px-3 py-1.5 panel rounded-full">
+                {t}
+              </span>
+            ),
+          )}
         </motion.div>
+
+        <motion.div
+          {...fadeUpImmediate}
+          transition={{ delay: 0.45, duration: 0.6 }}
+          className="mt-8 inline-flex items-center gap-3 panel rounded-full px-4 py-2 font-mono text-xs text-muted-foreground"
+        >
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-amber opacity-75 animate-ping" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber" />
+          </span>
+          Currently · Virtual Propulsion Engineer @ General Motors
+          <span className="text-foreground/50">— GM TRACK</span>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="border-t border-border/50">
+      <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-6">
+          <div className="md:col-span-3">
+            <div className="font-mono text-xs text-amber tracking-wider">
+              ABOUT
+            </div>
+          </div>
+          <motion.div
+            {...fadeUp}
+            className="md:col-span-9 space-y-6 text-lg md:text-xl leading-relaxed text-muted-foreground"
+          >
+            <p>
+              I&apos;m an electrical engineer drawn to problems that span the
+              whole stack — from transistors and PCBs up to the control software
+              that ties them together. I earned my B.S. in Electrical
+              Engineering from the{" "}
+              <span className="text-foreground">University of Michigan</span>.
+            </p>
+            <p>
+              Today I&apos;m a{" "}
+              <span className="text-foreground">
+                Virtual Propulsion Engineer at General Motors
+              </span>{" "}
+              through the GM TRACK rotational program, working on propulsion
+              systems for next-generation vehicles. Before that I spent three
+              summers in automotive engineering — driveline mechatronics and
+              controls integration at GM, and steering systems (Steer-by-Wire,
+              ECU hardware-in-the-loop) at Nexteer.
+            </p>
+            <p>
+              My favorite work lives where hardware meets software: designing an
+              out-of-order RISC-V processor in SystemVerilog, building embedded
+              IoT sensors, and tuning control systems for real-world plants. I
+              care about things that are rigorously tested and that actually
+              work on the road.
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -192,11 +331,15 @@ function Education() {
           {...fadeUp}
           className="panel rounded-xl p-8 flex flex-col md:flex-row md:items-center gap-6"
         >
-          <GraduationCap className="w-10 h-10 text-amber shrink-0" strokeWidth={1.5} />
+          <GraduationCap
+            className="w-10 h-10 text-amber shrink-0"
+            strokeWidth={1.5}
+          />
           <div className="flex-1">
             <h3 className="font-display text-2xl">University of Michigan</h3>
             <p className="text-muted-foreground mt-1">
-              B.S. in Electrical Engineering · GPA 3.7 / 4.0 · Aug 2021 – Dec 2025
+              B.S. in Electrical Engineering · GPA 3.7 / 4.0 · Aug 2021 – Dec
+              2025
             </p>
             <p className="font-mono text-xs text-muted-foreground mt-3">
               James B. Angell Scholar · Dean's List · University Honors
@@ -238,7 +381,9 @@ function Experience() {
                 <ul className="mt-5 space-y-3 text-muted-foreground leading-relaxed">
                   {e.bullets.map((b, j) => (
                     <li key={j} className="flex gap-3">
-                      <span className="text-amber font-mono mt-1.5 text-xs">▸</span>
+                      <span className="text-amber font-mono mt-1.5 text-xs">
+                        ▸
+                      </span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -267,7 +412,7 @@ const projects = [
     period: "Oct – Dec 2025",
     icon: CircuitBoard,
     desc: "An IoT room-occupancy sensor combining Time-of-Flight and PIR sensors for direction tracking. Wireless transmission to a central server for live monitoring - 90% detection accuracy.",
-    report: "/Final Paper Team 2.pdf",
+    report: "/smart-room-occupancy-report.pdf",
   },
   {
     title: "Maglev PID Controller",
@@ -280,7 +425,7 @@ const projects = [
 ];
 
 const resume = {
-  filename: "YousefMaitahResumeNv2.pdf",
+  filename: "yousef-maitah-resume.pdf",
   title: "Yousef Maitah Resume",
 };
 
@@ -330,10 +475,18 @@ function Projects() {
                   <div className="font-mono text-[10px] text-muted-foreground tracking-wider">
                     {p.period.toUpperCase()}
                   </div>
-                  <h3 className="font-display text-2xl mt-2 leading-tight">{p.title}</h3>
-                  <div className="font-mono text-xs text-amber mt-2">{p.tag}</div>
-                  <p className="text-muted-foreground text-sm mt-4 leading-relaxed">{p.desc}</p>
-                  <div className="font-mono text-[11px] text-muted-foreground/70 mt-4">Click to open the full report in a new tab.</div>
+                  <h3 className="font-display text-2xl mt-2 leading-tight">
+                    {p.title}
+                  </h3>
+                  <div className="font-mono text-xs text-amber mt-2">
+                    {p.tag}
+                  </div>
+                  <p className="text-muted-foreground text-sm mt-4 leading-relaxed">
+                    {p.desc}
+                  </p>
+                  <div className="font-mono text-[11px] text-muted-foreground/70 mt-4">
+                    Click to open the full report in a new tab.
+                  </div>
                 </div>
               </motion.a>
             );
@@ -346,14 +499,34 @@ function Projects() {
 
 function Skills() {
   const groups = [
-    { label: "Languages", items: ["C / C++", "Python", "SystemVerilog", "MATLAB", "HTML / CSS"] },
+    {
+      label: "Languages",
+      items: ["C / C++", "Python", "SystemVerilog", "MATLAB", "HTML / CSS"],
+    },
     {
       label: "Tools",
-      items: ["Altium Designer", "Cadence Virtuoso", "Simulink", "Vector Tools", "Arduino", "Linux", "Git", "VS Code", "Oscilloscope"],
+      items: [
+        "Altium Designer",
+        "Cadence Virtuoso",
+        "Simulink",
+        "Vector Tools",
+        "Arduino",
+        "Linux",
+        "Git",
+        "VS Code",
+        "Oscilloscope",
+      ],
     },
     {
       label: "Techniques",
-      items: ["Circuit Design", "FPGA", "Hardware Validation", "Communication Protocols", "Soldering", "System Design"],
+      items: [
+        "Circuit Design",
+        "FPGA",
+        "Hardware Validation",
+        "Communication Protocols",
+        "Soldering",
+        "System Design",
+      ],
     },
   ];
 
@@ -414,16 +587,29 @@ function Classes() {
 
 function Contact() {
   const links = [
-    { icon: Mail, label: "yousefm@umich.edu", href: "mailto:yousefm@umich.edu" },
-    { icon: Phone, label: "248-635-3775", href: "tel:+12486353775" },
-    { icon: Linkedin, label: "linkedin.com/in/yousef-maitah", href: "https://linkedin.com/in/yousef-maitah/" },
-    { icon: Github, label: "github.com/ymaitah", href: "https://github.com/ymaitah" },
+    {
+      icon: Mail,
+      label: "yousefm@umich.edu",
+      href: "mailto:yousefm@umich.edu",
+    },
+    {
+      icon: Linkedin,
+      label: "linkedin.com/in/yousef-maitah",
+      href: "https://linkedin.com/in/yousef-maitah/",
+    },
+    {
+      icon: Github,
+      label: "github.com/ymaitah",
+      href: "https://github.com/ymaitah",
+    },
   ];
   return (
     <section id="contact" className="border-t border-border/50 bg-card/30">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-40">
         <motion.div {...fadeUp}>
-          <div className="font-mono text-xs text-amber mb-6">05 - GET IN TOUCH</div>
+          <div className="font-mono text-xs text-amber mb-6">
+            05 - GET IN TOUCH
+          </div>
           <h2 className="font-display text-5xl md:text-7xl tracking-tight leading-[0.95]">
             Let's build something
             <br />
@@ -476,7 +662,9 @@ function SectionHeader({ index, title }: { index: string; title: string }) {
   return (
     <div className="flex items-baseline gap-6">
       <span className="font-mono text-xs text-amber">{index}</span>
-      <h2 className="font-display text-4xl md:text-5xl tracking-tight">{title}</h2>
+      <h2 className="font-display text-4xl md:text-5xl tracking-tight">
+        {title}
+      </h2>
       <div className="flex-1 h-px bg-border" />
     </div>
   );
