@@ -14,6 +14,7 @@ import {
   Github,
   FileText,
   Menu,
+  type LucideIcon,
 } from "lucide-react";
 import {
   Sheet,
@@ -397,7 +398,18 @@ function Experience() {
   );
 }
 
-const projects = [
+type Project = {
+  title: string;
+  tag: string;
+  period: string;
+  icon: LucideIcon;
+  desc: string;
+  report?: string; // path to a PDF in /public, e.g. "/maglev-report.pdf"
+  repo?: string; // public GitHub URL — shows a "Code" link when set
+  image?: string; // path to an image in /public, e.g. "/projects/maglev.png" — shows a thumbnail when set
+};
+
+const projects: Project[] = [
   {
     title: "Out-of-Order RISC-V Processor",
     tag: "SystemVerilog",
@@ -459,19 +471,27 @@ function Projects() {
           {projects.map((p, i) => {
             const Icon = p.icon;
             return (
-              <motion.a
+              <motion.article
                 key={i}
                 {...fadeUp}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
-                href={p.report}
-                target="_blank"
-                rel="noreferrer"
-                title={`View report for ${p.title}`}
-                className="panel rounded-xl p-7 group hover:border-amber/40 transition-colors relative overflow-hidden"
+                className="panel rounded-xl p-7 group hover:border-amber/40 transition-colors relative overflow-hidden flex flex-col"
               >
                 <div className="absolute -right-12 -top-12 w-40 h-40 rounded-full bg-amber/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="relative">
-                  <Icon className="w-7 h-7 text-amber mb-6" strokeWidth={1.5} />
+                <div className="relative flex flex-col flex-1">
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      loading="lazy"
+                      className="mb-6 w-full aspect-video rounded-lg border border-border object-cover"
+                    />
+                  ) : (
+                    <Icon
+                      className="w-7 h-7 text-amber mb-6"
+                      strokeWidth={1.5}
+                    />
+                  )}
                   <div className="font-mono text-[10px] text-muted-foreground tracking-wider">
                     {p.period.toUpperCase()}
                   </div>
@@ -484,11 +504,32 @@ function Projects() {
                   <p className="text-muted-foreground text-sm mt-4 leading-relaxed">
                     {p.desc}
                   </p>
-                  <div className="font-mono text-[11px] text-muted-foreground/70 mt-4">
-                    Click to open the full report in a new tab.
+                  <div className="mt-6 pt-4 border-t border-border/60 flex items-center gap-5 font-mono text-xs">
+                    {p.report && (
+                      <a
+                        href={p.report}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-amber hover:opacity-80 transition"
+                      >
+                        <FileText className="w-3.5 h-3.5" /> Report
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
+                    {p.repo && (
+                      <a
+                        href={p.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition"
+                      >
+                        <Github className="w-3.5 h-3.5" /> Code
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
                   </div>
                 </div>
-              </motion.a>
+              </motion.article>
             );
           })}
         </div>
