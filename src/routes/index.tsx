@@ -7,6 +7,7 @@ import {
   MapPin,
   Cpu,
   CircuitBoard,
+  Binary,
   Wrench,
   GraduationCap,
   ArrowUpRight,
@@ -225,18 +226,6 @@ function Hero() {
           )}
         </motion.div>
 
-        <motion.div
-          {...fadeUpImmediate}
-          transition={{ delay: 0.45, duration: 0.6 }}
-          className="mt-8 inline-flex items-center gap-3 panel rounded-full px-4 py-2 font-mono text-xs text-muted-foreground"
-        >
-          <span className="relative flex h-2 w-2 shrink-0">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-amber opacity-75 animate-ping" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber" />
-          </span>
-          Currently · Virtual Propulsion Engineer @ General Motors
-          <span className="text-foreground/50">— GM TRACK</span>
-        </motion.div>
       </div>
     </section>
   );
@@ -257,29 +246,30 @@ function About() {
             className="md:col-span-9 space-y-6 text-lg md:text-xl leading-relaxed text-muted-foreground"
           >
             <p>
-              I&apos;m an electrical engineer drawn to problems that span the
-              whole stack — from transistors and PCBs up to the control software
-              that ties them together. I earned my B.S. in Electrical
-              Engineering from the{" "}
-              <span className="text-foreground">University of Michigan</span>.
-            </p>
-            <p>
-              Today I&apos;m a{" "}
+              I&apos;m an Electrical Engineering graduate from the{" "}
+              <span className="text-foreground">University of Michigan</span>{" "}
+              (December 2025). Today I&apos;m a{" "}
               <span className="text-foreground">
                 Virtual Propulsion Engineer at General Motors
               </span>{" "}
-              through the GM TRACK rotational program, working on propulsion
-              systems for next-generation vehicles. Before that I spent three
-              summers in automotive engineering — driveline mechatronics and
-              controls integration at GM, and steering systems (Steer-by-Wire,
-              ECU hardware-in-the-loop) at Nexteer.
+              on the Energy Model &amp; Toolchain Development team, where I focus
+              on advancing propulsion simulation and modeling capabilities.
             </p>
             <p>
-              My favorite work lives where hardware meets software: designing an
-              out-of-order RISC-V processor in SystemVerilog, building embedded
-              IoT sensors, and tuning control systems for real-world plants. I
-              care about things that are rigorously tested and that actually
-              work on the road.
+              My background also includes a previous role at GM in{" "}
+              <span className="text-foreground">
+                Driveline Development &amp; Integration
+              </span>
+              , along with two internships at{" "}
+              <span className="text-foreground">Nexteer Automotive</span> where I
+              specialized in the validation of electric power steering systems.
+            </p>
+            <p>
+              My goal is to work on innovative projects that make a{" "}
+              <span className="italic text-amber">
+                meaningful impact on the world
+              </span>
+              .
             </p>
           </motion.div>
         </div>
@@ -433,6 +423,14 @@ const projects: Project[] = [
     icon: Wrench,
     desc: "A PID controller built on a linearized model of a nonlinear magnetic-levitation plant. Validated with hardware-in-the-loop testing - sub-3-second settling time and zero steady-state error.",
     report: "/MAGLEV_Report.pdf",
+  },
+  {
+    title: "8-bit Dual-Mode Ripple-Carry Adder",
+    tag: "Cadence Virtuoso · CMOS",
+    period: "Nov – Dec 2024",
+    icon: Binary,
+    desc: "A transistor-level 8-bit ripple-carry adder optimized for both addition and accumulation, built with DCVSL logic and transmission-gate cells. Tuned transistor sizing for a 1 GHz high-speed mode and 17.2% lower power in low-power mode.",
+    report: "/EECS_312_Final_Project_Report.pdf",
   },
 ];
 
