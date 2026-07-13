@@ -1,100 +1,79 @@
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
 @import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+@import "bootstrap/dist/css/bootstrap.min.css";
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-primary-hover: var(--primary-hover);
-
-  --font-sans: "Barlow", -apple-system, sans-serif;
-  --font-mono: "Barlow", monospace;
-}
-
+/* Custom Bootstrap theme — muted teal-slate primary, light-gray secondary,
+   Barlow typography — mirroring the reference site. */
 :root {
-  --radius: 0.5rem;
-  /* Clean, light palette with a muted teal-slate accent */
-  --background: #ffffff;
-  --foreground: #212529;
-  --card: #ffffff;
-  --card-foreground: #212529;
-  --popover: #ffffff;
-  --popover-foreground: #212529;
-  --primary: #365b6d;
-  --primary-hover: #2b4957;
-  --primary-foreground: #ffffff;
-  --secondary: #f7f7f7;
-  --secondary-foreground: #212529;
-  --muted: #f7f7f7;
-  --muted-foreground: #6c757d;
-  --accent: #365b6d;
-  --accent-foreground: #ffffff;
-  --destructive: #dc3545;
-  --destructive-foreground: #ffffff;
-  --border: #dee2e6;
-  --input: #dee2e6;
-  --ring: #365b6d;
+  --bs-primary: #365b6d;
+  --bs-primary-rgb: 54, 91, 109;
+  --bs-secondary: #f7f7f7;
+  --bs-secondary-rgb: 247, 247, 247;
+  --bs-link-color: #365b6d;
+  --bs-link-color-rgb: 54, 91, 109;
+  --bs-link-hover-color: #2b4957;
+  --bs-link-hover-color-rgb: 43, 73, 87;
+  --bs-body-font-family: "Barlow", -apple-system, "Segoe UI", sans-serif;
 }
 
-@layer base {
-  * {
-    border-color: var(--color-border);
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-  }
-  ::selection {
-    background: var(--color-primary);
-    color: #fff;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-@layer utilities {
-  /* Portrait with the signature offset drop-shadow */
-  .card-image {
-    border-radius: 15px;
-    box-shadow: 1rem 1rem var(--color-primary);
-    transition: all 0.3s;
-  }
-  .card-image:hover {
-    transform: translate(-0.5rem, -0.5rem);
-    box-shadow: 2rem 2rem var(--color-primary);
-  }
-  /* Cards lift with a soft shadow on hover */
-  .card-work {
-    transition: box-shadow 0.3s;
-  }
-  .card-work:hover {
-    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-  }
+/* Filled primary buttons */
+.btn-primary {
+  --bs-btn-bg: #365b6d;
+  --bs-btn-border-color: #365b6d;
+  --bs-btn-hover-bg: #2e4d5d;
+  --bs-btn-hover-border-color: #2b4957;
+  --bs-btn-active-bg: #2b4957;
+  --bs-btn-active-border-color: #294452;
+  --bs-btn-disabled-bg: #365b6d;
+  --bs-btn-disabled-border-color: #365b6d;
+}
+
+/* Outline primary buttons */
+.btn-outline-primary {
+  --bs-btn-color: #365b6d;
+  --bs-btn-border-color: #365b6d;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #365b6d;
+  --bs-btn-hover-border-color: #365b6d;
+  --bs-btn-active-bg: #365b6d;
+  --bs-btn-active-border-color: #365b6d;
+  --bs-btn-disabled-color: #365b6d;
+  --bs-btn-disabled-border-color: #365b6d;
+}
+
+/* Keep body text dark on the light secondary background */
+.bg-secondary {
+  color: #212529;
+}
+
+/* Teal hamburger toggler on small screens */
+.custom-toggler.navbar-toggler {
+  border-color: rgba(54, 91, 109, 0.5);
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23365b6d' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Cards lift with a soft shadow on hover */
+.card-work {
+  width: 21rem;
+  max-width: 100%;
+  transition: box-shadow 0.3s;
+}
+.card-work:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+/* Portrait with the signature offset drop-shadow */
+.card-image {
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: 1rem 1rem #365b6d;
+}
+.card-image:hover {
+  transform: translate(-0.5rem, -0.5rem);
+  box-shadow: 2rem 2rem #365b6d;
 }
