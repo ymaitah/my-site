@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -30,68 +30,71 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-amber: var(--amber);
-  --color-grid: var(--grid);
+  --color-primary-hover: var(--primary-hover);
 
-  --font-display: 'Fraunces', serif;
-  --font-sans: 'Space Grotesk', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: "Barlow", -apple-system, sans-serif;
+  --font-mono: "Barlow", monospace;
 }
 
 :root {
   --radius: 0.5rem;
-  /* Deep technical dark palette with warm amber accent */
-  --background: oklch(0.16 0.012 250);
-  --foreground: oklch(0.94 0.008 80);
-  --card: oklch(0.20 0.014 250);
-  --card-foreground: oklch(0.94 0.008 80);
-  --popover: oklch(0.20 0.014 250);
-  --popover-foreground: oklch(0.94 0.008 80);
-  --primary: oklch(0.78 0.15 65);
-  --primary-foreground: oklch(0.16 0.012 250);
-  --secondary: oklch(0.24 0.016 250);
-  --secondary-foreground: oklch(0.94 0.008 80);
-  --muted: oklch(0.22 0.014 250);
-  --muted-foreground: oklch(0.65 0.02 80);
-  --accent: oklch(0.78 0.15 65);
-  --accent-foreground: oklch(0.16 0.012 250);
-  --destructive: oklch(0.6 0.22 27);
-  --destructive-foreground: oklch(0.98 0.003 80);
-  --border: oklch(0.28 0.014 250);
-  --input: oklch(0.28 0.014 250);
-  --ring: oklch(0.78 0.15 65);
-  --amber: oklch(0.82 0.16 70);
-  --grid: oklch(0.24 0.014 250);
+  /* Clean, light palette with a muted teal-slate accent */
+  --background: #ffffff;
+  --foreground: #212529;
+  --card: #ffffff;
+  --card-foreground: #212529;
+  --popover: #ffffff;
+  --popover-foreground: #212529;
+  --primary: #365b6d;
+  --primary-hover: #2b4957;
+  --primary-foreground: #ffffff;
+  --secondary: #f7f7f7;
+  --secondary-foreground: #212529;
+  --muted: #f7f7f7;
+  --muted-foreground: #6c757d;
+  --accent: #365b6d;
+  --accent-foreground: #ffffff;
+  --destructive: #dc3545;
+  --destructive-foreground: #ffffff;
+  --border: #dee2e6;
+  --input: #dee2e6;
+  --ring: #365b6d;
 }
 
-.dark { color-scheme: dark; }
-
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    background-image:
-      linear-gradient(var(--color-grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
-    background-size: 64px 64px;
-    background-position: -1px -1px;
   }
-  ::selection { background: var(--color-primary); color: var(--color-primary-foreground); }
+  ::selection {
+    background: var(--color-primary);
+    color: #fff;
+  }
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); font-optical-sizing: auto; }
-  .font-mono { font-family: var(--font-mono); }
-  .text-amber { color: var(--color-amber); }
-  .glow-amber {
-    text-shadow: 0 0 40px color-mix(in oklab, var(--color-amber) 50%, transparent);
+  /* Portrait with the signature offset drop-shadow */
+  .card-image {
+    border-radius: 15px;
+    box-shadow: 1rem 1rem var(--color-primary);
+    transition: all 0.3s;
   }
-  .panel {
-    background: color-mix(in oklab, var(--color-card) 70%, transparent);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--color-border);
+  .card-image:hover {
+    transform: translate(-0.5rem, -0.5rem);
+    box-shadow: 2rem 2rem var(--color-primary);
+  }
+  /* Cards lift with a soft shadow on hover */
+  .card-work {
+    transition: box-shadow 0.3s;
+  }
+  .card-work:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   }
 }
