@@ -1,82 +1,208 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap");
 @import "bootstrap/dist/css/bootstrap.min.css";
 
-/* Custom Bootstrap theme — muted teal-slate primary, light-gray secondary,
-   Barlow typography — mirroring the reference site. */
+/* ---- Identity: Michigan-inspired deep blue + maize accent ---- */
 :root {
-  --bs-primary: #365b6d;
-  --bs-primary-rgb: 54, 91, 109;
-  --bs-secondary: #f7f7f7;
-  --bs-secondary-rgb: 247, 247, 247;
-  --bs-link-color: #365b6d;
-  --bs-link-color-rgb: 54, 91, 109;
-  --bs-link-hover-color: #2b4957;
-  --bs-link-hover-color-rgb: 43, 73, 87;
-  --bs-body-font-family: "Barlow", -apple-system, "Segoe UI", sans-serif;
+  --bs-primary: #00274c;
+  --bs-primary-rgb: 0, 39, 76;
+  --bs-secondary: #f4f6f8;
+  --bs-secondary-rgb: 244, 246, 248;
+  --bs-link-color: #00274c;
+  --bs-link-color-rgb: 0, 39, 76;
+  --bs-link-hover-color: #0b4a86;
+  --bs-link-hover-color-rgb: 11, 74, 134;
+  --bs-body-font-family: "Inter", -apple-system, "Segoe UI", sans-serif;
+  --bs-body-color: #1c2634;
+  --bs-body-color-rgb: 28, 38, 52;
+  --maize: #ffcb05;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Filled primary buttons */
+/* Space Grotesk gives headings a bit of engineered character */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Buttons */
 .btn-primary {
-  --bs-btn-bg: #365b6d;
-  --bs-btn-border-color: #365b6d;
-  --bs-btn-hover-bg: #2e4d5d;
-  --bs-btn-hover-border-color: #2b4957;
-  --bs-btn-active-bg: #2b4957;
-  --bs-btn-active-border-color: #294452;
-  --bs-btn-disabled-bg: #365b6d;
-  --bs-btn-disabled-border-color: #365b6d;
+  --bs-btn-bg: #00274c;
+  --bs-btn-border-color: #00274c;
+  --bs-btn-hover-bg: #0b3a68;
+  --bs-btn-hover-border-color: #0b3a68;
+  --bs-btn-active-bg: #001d3a;
+  --bs-btn-active-border-color: #001d3a;
+  --bs-btn-disabled-bg: #00274c;
+  --bs-btn-disabled-border-color: #00274c;
 }
-
-/* Outline primary buttons */
 .btn-outline-primary {
-  --bs-btn-color: #365b6d;
-  --bs-btn-border-color: #365b6d;
+  --bs-btn-color: #00274c;
+  --bs-btn-border-color: #00274c;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #365b6d;
-  --bs-btn-hover-border-color: #365b6d;
-  --bs-btn-active-bg: #365b6d;
-  --bs-btn-active-border-color: #365b6d;
-  --bs-btn-disabled-color: #365b6d;
-  --bs-btn-disabled-border-color: #365b6d;
+  --bs-btn-hover-bg: #00274c;
+  --bs-btn-hover-border-color: #00274c;
+  --bs-btn-active-bg: #00274c;
+  --bs-btn-active-border-color: #00274c;
+  --bs-btn-disabled-color: #00274c;
+  --bs-btn-disabled-border-color: #00274c;
 }
 
-/* Keep body text dark on the light secondary background */
 .bg-secondary {
-  color: #212529;
+  color: #1c2634;
 }
 
-/* Teal hamburger toggler on small screens */
-.custom-toggler.navbar-toggler {
-  border-color: rgba(54, 91, 109, 0.5);
+.navbar-brand {
+  font-weight: 700;
 }
-.custom-toggler .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23365b6d' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.navbar .nav-link {
+  font-weight: 500;
+}
+.navbar .nav-link:hover {
+  color: #00274c;
 }
 
-/* Cards lift with a soft shadow on hover */
+/* Generous, airy sections */
+.section {
+  padding: 5rem 0;
+}
+@media (max-width: 575.98px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+}
+
+/* Mono "eyebrow" kicker label with a maize tick */
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+.eyebrow--light {
+  color: #9db4cc;
+}
+.eyebrow-tick {
+  display: inline-block;
+  width: 1.75rem;
+  height: 2px;
+  margin-right: 0.6rem;
+  background: var(--maize);
+  vertical-align: middle;
+}
+
+/* Section titles get a short maize underline */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-weight: 700;
+  padding-bottom: 0.65rem;
+  margin-bottom: 2rem;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 2.75rem;
+  border-radius: 2px;
+  background: var(--maize);
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Bordered chips for skills + coursework */
+.chip {
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #d7dde3;
+  border-radius: 0.5rem;
+  color: #33414f;
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.chip:hover {
+  border-color: #00274c;
+  color: #00274c;
+}
+
+.course {
+  height: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e3e8ee;
+  border-radius: 0.6rem;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+.course:hover {
+  border-color: var(--maize);
+}
+
+/* Experience list */
+.exp-item + .exp-item {
+  border-top: 1px solid #e3e8ee;
+}
+.exp-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.exp-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-bottom: 0.55rem;
+}
+.exp-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #00274c;
+}
+
+/* Cards lift on hover */
 .card-work {
-  width: 21rem;
-  max-width: 100%;
-  transition: box-shadow 0.3s;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 .card-work:hover {
-  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 39, 76, 0.12);
 }
 
-/* Portrait with the signature offset drop-shadow */
+/* Portrait with the signature maize offset shadow */
 .card-image {
   width: 100%;
   max-width: 320px;
   height: auto;
   transition: all 0.3s;
-  border-radius: 15px;
-  box-shadow: 1rem 1rem #365b6d;
+  border-radius: 14px;
+  box-shadow: 0.9rem 0.9rem var(--maize);
 }
 .card-image:hover {
-  transform: translate(-0.5rem, -0.5rem);
-  box-shadow: 2rem 2rem #365b6d;
+  transform: translate(-0.4rem, -0.4rem);
+  box-shadow: 1.5rem 1.5rem var(--maize);
 }

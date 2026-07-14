@@ -39,48 +39,134 @@ export const Route = createFileRoute("/")({
 
 const navLinks = [
   { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
+  { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
-  { href: "#links", label: "Links" },
 ];
 
 const experiences = [
   {
-    org: "General Motors",
-    text: "Engineering Intern — Driveline Development & Integration · Summer 2025",
+    company: "General Motors",
+    role: "Engineering Intern · Driveline Development & Integration",
+    period: "May 2025 – Aug 2025",
+    location: "Milford, MI",
+    bullets: [
+      "Supported driveline mechatronics and controls integration on the D2-2 AWD system (Chevy Equinox / GMC Terrain), investigating warranty and resolving system performance and software issues.",
+      "Conducted on-road and off-road data collection for wheel torque and driveline dynamics — including −40°C cold-box and sand-dune terrain testing.",
+      "Collaborated cross-functionally with technical specialists, DREs, and suppliers to assess halfshaft NVH characteristics.",
+    ],
   },
   {
-    org: "Nexteer Automotive",
-    text: "Engineering Intern — Systems Application Team · Summer 2024",
+    company: "Nexteer Automotive",
+    role: "Engineering Intern · Systems Application Team",
+    period: "May 2024 – Aug 2024",
+    location: "Saginaw, MI",
+    bullets: [
+      "Developed an ignition test box for a Steer-by-Wire project, expanding test coverage and reliability.",
+      "Analyzed OEM design, safety, and software requirements to strengthen feature-function mapping.",
+      "Authored detailed work instructions to accelerate testing and knowledge transfer.",
+    ],
   },
   {
-    org: "Nexteer Automotive",
-    text: "Engineering Intern — ECU HiL Team · Summer 2023",
+    company: "Nexteer Automotive",
+    role: "Engineering Intern · ECU HiL Team",
+    period: "May 2023 – Aug 2023",
+    location: "Auburn Hills, MI",
+    bullets: [
+      "Designed and executed test procedures for ECU-based electric power steering, improving system reliability.",
+      "Configured and debugged harness/test bench setups, cutting setup time and improving testing efficiency by 30%.",
+      "Analyzed test data to identify patterns and anomalies, delivering detailed reports and recommendations.",
+    ],
   },
 ];
 
 const projects = [
   {
     title: "Out-of-Order RISC-V Processor",
-    text: "A fully synthesizable N-way superscalar out-of-order processor with instruction prefetching and early branch resolution, using a MIPS R10000-style microarchitecture with register renaming.",
+    tag: "SystemVerilog",
+    period: "Oct – Dec 2025",
+    desc: "A fully synthesizable N-way superscalar out-of-order processor with instruction prefetching and early branch resolution. MIPS R10000-style microarchitecture with register renaming.",
     report: "/EECS_470_Final_Project_Report.pdf",
   },
   {
     title: "Smart Room Occupancy Monitoring",
-    text: "An IoT room-occupancy sensor combining Time-of-Flight and PIR sensors for direction tracking, transmitting to a central server for live monitoring at 90% detection accuracy.",
+    tag: "C · ESP32 · IoT",
+    period: "Oct – Dec 2025",
+    desc: "An IoT room-occupancy sensor combining Time-of-Flight and PIR sensors for direction tracking, transmitting to a central server for live monitoring at 90% detection accuracy.",
     report: "/smart-room-occupancy-report.pdf",
   },
   {
     title: "8-bit Dual-Mode Ripple-Carry Adder",
-    text: "A dual-mode ripple-carry adder in Cadence Virtuoso — 1 GHz in high-speed mode and 17.2% lower power in low-power mode versus a traditional mirror adder.",
+    tag: "Cadence Virtuoso",
+    period: "Nov – Dec 2024",
+    desc: "A dual-mode ripple-carry adder optimized for addition and accumulation. Transistor sizing hit a 1 GHz clock in high-speed mode while cutting power 17.2% in low-power mode versus a mirror adder.",
     report: "/EECS_312_Final_Project_Report.pdf",
   },
   {
     title: "Maglev PID Controller",
-    text: "A PID controller on a linearized model of a nonlinear magnetic-levitation plant, validated with hardware-in-the-loop testing — sub-3-second settling and zero steady-state error.",
+    tag: "MATLAB · Simulink",
+    period: "Mar – Apr 2025",
+    desc: "A PID controller built on a linearized model of a nonlinear magnetic-levitation plant. Validated with hardware-in-the-loop testing — sub-3-second settling time and zero steady-state error.",
     report: "/MAGLEV_Report.pdf",
   },
 ];
+
+const skillGroups = [
+  {
+    label: "Languages",
+    items: ["C / C++", "Python", "SystemVerilog", "MATLAB", "HTML / CSS"],
+  },
+  {
+    label: "Tools",
+    items: [
+      "Altium Designer",
+      "Cadence Virtuoso",
+      "Simulink",
+      "Vector Tools",
+      "Arduino",
+      "Linux",
+      "Git",
+      "VS Code",
+      "Oscilloscope",
+    ],
+  },
+  {
+    label: "Techniques",
+    items: [
+      "Circuit Design",
+      "FPGA",
+      "Hardware Validation",
+      "Communication Protocols",
+      "Soldering",
+      "System Design",
+    ],
+  },
+];
+
+const courses = [
+  { code: "EECS 270", title: "Introduction to Logic Design" },
+  { code: "EECS 312", title: "Digital Integrated Circuits" },
+  { code: "EECS 320", title: "Semiconductor Devices" },
+  { code: "EECS 370", title: "Computer Organization" },
+  { code: "EECS 470", title: "Computer Architecture" },
+  { code: "EECS 460", title: "Control Systems Analysis & Design" },
+  { code: "EECS 216", title: "Signals and Systems" },
+  { code: "EECS 215", title: "Introduction to Electrical Circuits" },
+  { code: "EECS 230", title: "Engineering Electromagnetics" },
+  { code: "EECS 250", title: "Electrical Sensing Systems" },
+  { code: "EECS 280", title: "Programming and Data Structures" },
+  { code: "EECS 301", title: "Probabilistic Methods in Engineering" },
+];
+
+function Eyebrow({ children, light }: { children: string; light?: boolean }) {
+  return (
+    <div className={`eyebrow mb-2${light ? " eyebrow--light" : ""}`}>
+      <span className="eyebrow-tick" />
+      {children}
+    </div>
+  );
+}
 
 function Index() {
   const [open, setOpen] = useState(false);
@@ -95,13 +181,13 @@ function Index() {
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-sm navbar-light bg-secondary">
+      <nav className="navbar navbar-expand-sm navbar-light bg-secondary sticky-top border-bottom">
         <div className="container">
           <a className="navbar-brand" href="#top">
             Yousef Maitah
           </a>
           <button
-            className="custom-toggler navbar-toggler"
+            className="navbar-toggler"
             type="button"
             aria-label="Toggle navigation"
             aria-expanded={open}
@@ -110,7 +196,7 @@ function Index() {
             <span className="navbar-toggler-icon" />
           </button>
           <div className={`collapse navbar-collapse${open ? " show" : ""}`}>
-            <div className="navbar-nav">
+            <div className="navbar-nav ms-auto">
               {navLinks.map((l) => (
                 <a
                   key={l.href}
@@ -127,20 +213,27 @@ function Index() {
       </nav>
 
       {/* Hero */}
-      <div id="top" className="bg-secondary py-5 px-5">
+      <header id="top" className="section bg-secondary">
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-sm-6">
-              <h1 className="text-primary fw-bold display-3">Yousef Maitah</h1>
-              <p>
-                Electrical Engineer @ General Motors · University of Michigan
+          <div className="row align-items-center g-5">
+            <div className="col-md-7">
+              <Eyebrow>Electrical Engineer · Ann Arbor, MI</Eyebrow>
+              <h1 className="display-2 fw-bold text-primary mb-3">
+                Yousef Maitah
+              </h1>
+              <p
+                className="fs-5 text-body-secondary mb-4"
+                style={{ maxWidth: "34rem" }}
+              >
+                Electrical engineer working where hardware meets software — from
+                driveline mechatronics and embedded systems to processor design.
               </p>
-              <div className="text-center">
-                <a className="btn btn-primary my-1 mx-3" href="#contact">
-                  Contact Me
+              <div className="d-flex flex-wrap gap-3">
+                <a className="btn btn-primary px-4" href="#contact">
+                  Get in touch
                 </a>
                 <a
-                  className="btn btn-outline-primary my-1 mx-3"
+                  className="btn btn-outline-primary px-4"
                   href={RESUME}
                   target="_blank"
                   rel="noreferrer"
@@ -149,109 +242,212 @@ function Index() {
                 </a>
               </div>
             </div>
-            <div className="col-sm-6 text-center">
+            <div className="col-md-5 text-center">
               <img
-                className="img-fluid my-3 card-image"
+                className="img-fluid card-image"
                 src={yousefPhoto}
                 alt="Yousef Maitah"
               />
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Introduction */}
-      <div id="about" className="bg-white py-5 px-5">
+      {/* About */}
+      <section id="about" className="section">
         <div className="container">
-          <h1 className="text-primary fw-bold">Introduction</h1>
-          <div className="px-sm-5">
-            <p>
-              I&apos;m an Electrical Engineering graduate from the University of
-              Michigan (December 2025).
-            </p>
-            <p>
-              I&apos;m currently a Virtual Propulsion Engineer at General Motors
-              within the Energy Model and Toolchain Development team, where I
-              focus on advancing propulsion simulation and modeling
-              capabilities.
-            </p>
-            <p>
-              My professional background includes a previous role at GM in the
-              Driveline Development and Integration group, as well as two
-              internships at Nexteer Automotive where I specialized in the
-              validation of electric power steering systems.
-            </p>
-            <p>
-              <strong>Goal:</strong> work on innovative projects that make a
-              meaningful impact on the world.
-            </p>
+          <Eyebrow>Who I am</Eyebrow>
+          <h2 className="section-title display-6">About</h2>
+          <div className="row">
+            <div className="col-lg-9">
+              <p className="fs-5">
+                I&apos;m an Electrical Engineering graduate from the{" "}
+                <span className="text-primary fw-semibold">
+                  University of Michigan
+                </span>{" "}
+                (December 2025), drawn to problems that span the whole stack —
+                from transistors and PCBs up to the control software that ties
+                them together.
+              </p>
+              <p className="fs-5">
+                I&apos;m currently a{" "}
+                <span className="text-primary fw-semibold">
+                  Virtual Propulsion Engineer at General Motors
+                </span>{" "}
+                within the Energy Model and Toolchain Development team, where I
+                focus on advancing propulsion simulation and modeling
+                capabilities. Before that I spent three summers in automotive
+                engineering — driveline mechatronics at GM, and steering systems
+                validation at Nexteer Automotive.
+              </p>
+              <p className="fs-5 mb-0">
+                My favorite work lives where hardware meets software: designing
+                an out-of-order RISC-V processor, building embedded IoT sensors,
+                and tuning control systems for real-world plants. My goal is to
+                work on innovative projects that make a meaningful impact on the
+                world.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Work Experiences */}
-      <div className="bg-secondary py-5 px-5">
+      {/* Education */}
+      <section id="education" className="section bg-secondary">
         <div className="container">
-          <h1 className="text-primary fw-bold">Work Experiences</h1>
-          <div className="d-flex flex-row flex-wrap justify-content-center">
+          <Eyebrow>Where I studied</Eyebrow>
+          <h2 className="section-title display-6">Education</h2>
+          <div className="card border-0 shadow-sm p-4">
+            <div className="row align-items-center g-3">
+              <div className="col-md-8">
+                <h3 className="h4 mb-1 text-primary">University of Michigan</h3>
+                <p className="mb-2">
+                  B.S. in Electrical Engineering · GPA 3.7 / 4.0
+                </p>
+                <div className="eyebrow">
+                  James B. Angell Scholar · Dean&apos;s List · University Honors
+                </div>
+              </div>
+              <div className="col-md-4 text-md-end">
+                <span className="mono text-body-secondary">
+                  Aug 2021 – Dec 2025
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section id="experience" className="section">
+        <div className="container">
+          <Eyebrow>Where I&apos;ve worked</Eyebrow>
+          <h2 className="section-title display-6">Experience</h2>
+          <div>
             {experiences.map((e, i) => (
-              <div key={i} className="card py-3 px-3 mx-sm-4 my-4 card-work">
-                <h4 className="text-primary">{e.org}</h4>
-                <p className="text-dark">{e.text}</p>
+              <div key={i} className="exp-item row py-4">
+                <div className="col-md-4 mb-2 mb-md-0">
+                  <div className="mono small text-primary">{e.period}</div>
+                  <div className="mono small text-body-secondary mt-1">
+                    {e.location}
+                  </div>
+                </div>
+                <div className="col-md-8">
+                  <h3 className="h4 mb-1 text-primary">{e.company}</h3>
+                  <div className="mono small text-body-secondary mb-3">
+                    {e.role}
+                  </div>
+                  <ul className="exp-list">
+                    {e.bullets.map((b, j) => (
+                      <li key={j}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Projects */}
-      <div id="projects" className="bg-primary py-5 px-5">
+      <section id="projects" className="section bg-primary text-white">
         <div className="container">
-          <h1 className="text-light fw-bold">Projects</h1>
-          <div className="d-flex flex-row flex-wrap justify-content-center">
+          <Eyebrow light>Things I&apos;ve built</Eyebrow>
+          <h2 className="section-title display-6 text-white">
+            Selected Projects
+          </h2>
+          <div className="row g-4">
             {projects.map((p, i) => (
-              <div key={i} className="card py-3 px-3 mx-sm-4 my-4 card-work">
-                <h4 className="text-primary">{p.title}</h4>
-                <p className="text-dark">{p.text}</p>
-                <div className="text-end">
-                  <a href={p.report} target="_blank" rel="noreferrer">
-                    Report →
+              <div key={i} className="col-md-6 col-lg-3">
+                <div className="card card-work h-100 border-0 p-4">
+                  <div
+                    className="mono text-body-secondary"
+                    style={{ fontSize: "0.72rem" }}
+                  >
+                    {p.period.toUpperCase()}
+                  </div>
+                  <h3 className="h5 mt-2 mb-1 text-primary">{p.title}</h3>
+                  <div className="mono small mb-3" style={{ color: "#7d8794" }}>
+                    {p.tag}
+                  </div>
+                  <p className="text-body-secondary flex-grow-1 small">
+                    {p.desc}
+                  </p>
+                  <a
+                    className="mono small text-decoration-none"
+                    href={p.report}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Read report →
                   </a>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Contact */}
-      <div id="contact" className="bg-white py-5 px-5">
+      {/* Skills */}
+      <section id="skills" className="section">
         <div className="container">
-          <h1 className="text-primary fw-bold">Contact Info</h1>
-          <div className="px-sm-5">
-            <p>
-              Feel free to reach me at{" "}
-              <a href="mailto:yousefm@umich.edu">yousefm@umich.edu</a>!
-            </p>
-            <div>
-              <a
-                className="btn btn-primary my-1"
-                href="mailto:yousefm@umich.edu"
-              >
-                Email Me
-              </a>
-            </div>
+          <Eyebrow>What I work with</Eyebrow>
+          <h2 className="section-title display-6">Toolkit</h2>
+          <div className="row g-4">
+            {skillGroups.map((g) => (
+              <div key={g.label} className="col-md-4">
+                <div className="eyebrow mb-3">{g.label}</div>
+                <div className="d-flex flex-wrap gap-2">
+                  {g.items.map((s) => (
+                    <span key={s} className="chip">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Links */}
-      <div id="links" className="bg-secondary py-5 px-5">
+      {/* Coursework */}
+      <section id="coursework" className="section bg-secondary">
         <div className="container">
-          <h1 className="text-primary fw-bold">Links</h1>
-          <div className="px-sm-5">
+          <Eyebrow>Selected coursework</Eyebrow>
+          <h2 className="section-title display-6">Coursework</h2>
+          <div className="row g-3">
+            {courses.map((c) => (
+              <div key={c.code} className="col-sm-6 col-lg-4">
+                <div className="course">
+                  <span className="mono fw-semibold text-primary">
+                    {c.code}
+                  </span>
+                  <span className="text-body-secondary small ms-2">
+                    {c.title}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="section">
+        <div className="container">
+          <Eyebrow>Say hello</Eyebrow>
+          <h2 className="section-title display-6">Get in touch</h2>
+          <p className="fs-5" style={{ maxWidth: "34rem" }}>
+            I&apos;m always happy to talk hardware, software, or something in
+            between. Reach me at{" "}
+            <a href="mailto:yousefm@umich.edu">yousefm@umich.edu</a>.
+          </p>
+          <div className="d-flex flex-wrap gap-3 mt-4">
+            <a className="btn btn-primary px-4" href="mailto:yousefm@umich.edu">
+              Email Me
+            </a>
             <a
-              className="btn btn-outline-primary my-1 me-3"
+              className="btn btn-outline-primary px-4"
               href="https://linkedin.com/in/yousef-maitah/"
               target="_blank"
               rel="noreferrer"
@@ -259,7 +455,7 @@ function Index() {
               LinkedIn
             </a>
             <a
-              className="btn btn-outline-primary my-1 me-3"
+              className="btn btn-outline-primary px-4"
               href="https://github.com/ymaitah"
               target="_blank"
               rel="noreferrer"
@@ -267,7 +463,7 @@ function Index() {
               GitHub
             </a>
             <a
-              className="btn btn-outline-primary my-1 me-3"
+              className="btn btn-outline-primary px-4"
               href={RESUME}
               target="_blank"
               rel="noreferrer"
@@ -276,12 +472,17 @@ function Index() {
             </a>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-secondary py-4 px-5 border-top">
-        <div className="container text-center text-muted">
-          © 2026 Yousef Maitah · Ann Arbor, MI
+      <footer className="bg-secondary py-4 border-top">
+        <div className="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+          <span className="mono small text-body-secondary">
+            © 2026 Yousef Maitah
+          </span>
+          <span className="mono small text-body-secondary">
+            Built in Ann Arbor, MI
+          </span>
         </div>
       </footer>
     </div>
