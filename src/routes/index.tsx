@@ -49,6 +49,17 @@ const navLinks = [
 const experiences = [
   {
     company: "General Motors",
+    role: "Virtual Propulsion Engineer · Energy Model & Toolchain Development",
+    period: "Jan 2026 – Sep 2026",
+    location: "Warren, MI",
+    bullets: [
+      "Developed and enhanced vehicle energy and performance simulation tools, improving model fidelity, correlation accuracy, and data analysis workflows across propulsion systems.",
+      "Led a Design for Six Sigma (DFSS) Green Belt project to architect an AI-driven, backwards-facing EV simulation model in MATLAB/Simulink, accelerating simulation times by up to 240x compared to legacy models.",
+      "Enabled team efficiency by developing user-focused tools and improving usability, documentation, and workflows.",
+    ],
+  },
+  {
+    company: "General Motors",
     role: "Engineering Intern · Driveline Development & Integration",
     period: "May 2025 – Aug 2025",
     location: "Milford, MI",
@@ -64,7 +75,7 @@ const experiences = [
     period: "May 2024 – Aug 2024",
     location: "Saginaw, MI",
     bullets: [
-      "Developed an ignition test box for a Steer-by-Wire project, expanding test coverage and reliability.",
+      "Engineered and validated a custom ignition test box for a Steer-by-Wire system, managing physical board bring-up, debugging, and harness configuration to ensure comprehensive hardware test coverage.",
       "Analyzed OEM design, safety, and software requirements to strengthen feature-function mapping.",
       "Authored detailed work instructions to accelerate testing and knowledge transfer.",
     ],
