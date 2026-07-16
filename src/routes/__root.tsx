@@ -52,7 +52,6 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-      { name: "theme-color", content: "#365b6d" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -71,11 +70,26 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundComponent,
 });
 
+// Runs before first paint so the saved/system theme applies without a flash.
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.setAttribute("data-bs-theme",t);}catch(e){}})();`;
+
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-bs-theme="light" suppressHydrationWarning>
       <head>
         <HeadContent />
+        {/* Rendered here rather than via head() meta, which dedupes by name. */}
+        <meta
+          name="theme-color"
+          content="#f4f6f8"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#0d1827"
+          media="(prefers-color-scheme: dark)"
+        />
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

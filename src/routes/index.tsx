@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import yousefPhoto from "@/assets/yousef-photo.webp";
 
 const SITE_URL = "https://yousefmaitah.com";
@@ -170,6 +171,9 @@ function Eyebrow({ children, light }: { children: string; light?: boolean }) {
 
 function Index() {
   const [open, setOpen] = useState(false);
+  // Starts "light" to match SSR; the inline head script has already applied the
+  // real theme, so we sync to it on mount.
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash) {
@@ -178,24 +182,61 @@ function Index() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (document.documentElement.getAttribute("data-bs-theme") === "dark") {
+      setTheme("dark");
+    }
+  }, []);
+
+  function toggleTheme() {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-bs-theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* storage unavailable — theme still applies for this session */
+    }
+  }
+
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-sm navbar-light bg-secondary sticky-top border-bottom">
+      <nav className="navbar navbar-expand-sm bg-secondary sticky-top border-bottom">
         <div className="container">
           <a className="navbar-brand" href="#top">
             Yousef Maitah
           </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            aria-label="Toggle navigation"
-            aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
+          <div className="d-flex align-items-center gap-2 order-sm-3">
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={toggleTheme}
+              aria-label={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
+            >
+              {theme === "dark" ? (
+                <Sun size={16} strokeWidth={2} />
+              ) : (
+                <Moon size={16} strokeWidth={2} />
+              )}
+            </button>
+            <button
+              className="navbar-toggler"
+              type="button"
+              aria-label="Toggle navigation"
+              aria-expanded={open}
+              onClick={() => setOpen((o) => !o)}
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+          </div>
+          <div
+            className={`collapse navbar-collapse order-sm-2${open ? " show" : ""}`}
           >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className={`collapse navbar-collapse${open ? " show" : ""}`}>
             <div className="navbar-nav ms-auto">
               {navLinks.map((l) => (
                 <a
@@ -350,7 +391,7 @@ function Index() {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="section bg-primary text-white">
+      <section id="projects" className="section band">
         <div className="container">
           <Eyebrow light>Things I&apos;ve built</Eyebrow>
           <h2 className="section-title display-6 text-white">
@@ -367,7 +408,7 @@ function Index() {
                     {p.period.toUpperCase()}
                   </div>
                   <h3 className="h5 mt-2 mb-1 text-primary">{p.title}</h3>
-                  <div className="mono small mb-3" style={{ color: "#7d8794" }}>
+                  <div className="mono small text-body-secondary mb-3">
                     {p.tag}
                   </div>
                   <p className="text-body-secondary flex-grow-1 small">

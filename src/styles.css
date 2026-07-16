@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap");
 @import "bootstrap/dist/css/bootstrap.min.css";
 
-/* ---- Identity: Michigan-inspired deep blue + maize accent ---- */
-:root {
+/* ---- Light: Michigan-inspired deep blue + maize accent ---- */
+:root,
+[data-bs-theme="light"] {
   --bs-primary: #00274c;
   --bs-primary-rgb: 0, 39, 76;
   --bs-secondary: #f4f6f8;
@@ -14,7 +15,39 @@
   --bs-body-font-family: "Inter", -apple-system, "Segoe UI", sans-serif;
   --bs-body-color: #1c2634;
   --bs-body-color-rgb: 28, 38, 52;
+  --bs-border-color: #e3e8ee;
   --maize: #ffcb05;
+
+  /* Semantic tokens that flip with the theme */
+  --surface: #ffffff;
+  --surface-border: #e3e8ee;
+  --band-bg: #00274c;
+  --ink-muted: #6b7280;
+  --bs-card-bg: var(--surface);
+}
+
+/* ---- Dark ---- */
+[data-bs-theme="dark"] {
+  --bs-body-bg: #0d1827;
+  --bs-body-color: #e2eaf3;
+  --bs-body-color-rgb: 226, 234, 243;
+  --bs-secondary: #132032;
+  --bs-secondary-rgb: 19, 32, 50;
+  --bs-secondary-color: rgba(226, 234, 243, 0.72);
+  --bs-primary: #79b0e8;
+  --bs-primary-rgb: 121, 176, 232;
+  --bs-link-color: #79b0e8;
+  --bs-link-color-rgb: 121, 176, 232;
+  --bs-link-hover-color: #a8cdf3;
+  --bs-link-hover-color-rgb: 168, 205, 243;
+  --bs-border-color: #28394f;
+  --bs-emphasis-color: #ffffff;
+
+  --surface: #1a2941;
+  --surface-border: #2b3d55;
+  --band-bg: #081222;
+  --ink-muted: #93a4b8;
+  --bs-card-bg: var(--surface);
 }
 
 html {
@@ -61,9 +94,35 @@ h6,
   --bs-btn-disabled-color: #00274c;
   --bs-btn-disabled-border-color: #00274c;
 }
+[data-bs-theme="dark"] .btn-primary {
+  --bs-btn-color: #0b1522;
+  --bs-btn-bg: #79b0e8;
+  --bs-btn-border-color: #79b0e8;
+  --bs-btn-hover-color: #0b1522;
+  --bs-btn-hover-bg: #93c1ef;
+  --bs-btn-hover-border-color: #93c1ef;
+  --bs-btn-active-color: #0b1522;
+  --bs-btn-active-bg: #a8cdf3;
+  --bs-btn-active-border-color: #a8cdf3;
+  --bs-btn-disabled-color: #0b1522;
+  --bs-btn-disabled-bg: #79b0e8;
+  --bs-btn-disabled-border-color: #79b0e8;
+}
+[data-bs-theme="dark"] .btn-outline-primary {
+  --bs-btn-color: #79b0e8;
+  --bs-btn-border-color: #79b0e8;
+  --bs-btn-hover-color: #0b1522;
+  --bs-btn-hover-bg: #79b0e8;
+  --bs-btn-hover-border-color: #79b0e8;
+  --bs-btn-active-color: #0b1522;
+  --bs-btn-active-bg: #79b0e8;
+  --bs-btn-active-border-color: #79b0e8;
+  --bs-btn-disabled-color: #79b0e8;
+  --bs-btn-disabled-border-color: #79b0e8;
+}
 
 .bg-secondary {
-  color: #1c2634;
+  color: var(--bs-body-color);
 }
 
 .navbar-brand {
@@ -73,7 +132,27 @@ h6,
   font-weight: 500;
 }
 .navbar .nav-link:hover {
-  color: #00274c;
+  color: var(--bs-primary);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--bs-body-color);
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.theme-toggle:hover {
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
 }
 
 /* Generous, airy sections */
@@ -86,6 +165,12 @@ h6,
   }
 }
 
+/* The Projects band — deep navy in light, deepest navy in dark */
+.band {
+  background: var(--band-bg);
+  color: #fff;
+}
+
 /* Mono "eyebrow" kicker label with a maize tick */
 .eyebrow {
   font-family: "JetBrains Mono", monospace;
@@ -93,7 +178,7 @@ h6,
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--ink-muted);
 }
 .eyebrow--light {
   color: #9db4cc;
@@ -136,25 +221,25 @@ h6,
   font-family: "JetBrains Mono", monospace;
   font-size: 0.8rem;
   padding: 0.35rem 0.7rem;
-  border: 1px solid #d7dde3;
+  border: 1px solid var(--surface-border);
   border-radius: 0.5rem;
-  color: #33414f;
-  background: #fff;
+  color: var(--bs-body-color);
+  background: var(--surface);
   transition:
     border-color 0.2s,
     color 0.2s;
 }
 .chip:hover {
-  border-color: #00274c;
-  color: #00274c;
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
 }
 
 .course {
   height: 100%;
   padding: 0.85rem 1rem;
-  border: 1px solid #e3e8ee;
+  border: 1px solid var(--surface-border);
   border-radius: 0.6rem;
-  background: #fff;
+  background: var(--surface);
   transition: border-color 0.2s;
 }
 .course:hover {
@@ -163,7 +248,7 @@ h6,
 
 /* Experience list */
 .exp-item + .exp-item {
-  border-top: 1px solid #e3e8ee;
+  border-top: 1px solid var(--bs-border-color);
 }
 .exp-list {
   list-style: none;
@@ -179,7 +264,7 @@ h6,
   content: "▸";
   position: absolute;
   left: 0;
-  color: #00274c;
+  color: var(--bs-primary);
 }
 
 /* Cards lift on hover */
@@ -191,6 +276,9 @@ h6,
 .card-work:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(0, 39, 76, 0.12);
+}
+[data-bs-theme="dark"] .card-work:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
 /* Portrait with the signature maize offset shadow */
