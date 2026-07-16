@@ -225,7 +225,6 @@ function Hero() {
             ),
           )}
         </motion.div>
-
       </div>
     </section>
   );
@@ -252,8 +251,9 @@ function About() {
               <span className="text-foreground">
                 Virtual Propulsion Engineer at General Motors
               </span>{" "}
-              on the Energy Model &amp; Toolchain Development team, where I focus
-              on advancing propulsion simulation and modeling capabilities.
+              on the Energy Model &amp; Toolchain Development team, where I
+              focus on advancing propulsion simulation and modeling
+              capabilities.
             </p>
             <p>
               My background also includes a previous role at GM in{" "}
@@ -261,8 +261,9 @@ function About() {
                 Driveline Development &amp; Integration
               </span>
               , along with two internships at{" "}
-              <span className="text-foreground">Nexteer Automotive</span> where I
-              specialized in the validation of electric power steering systems.
+              <span className="text-foreground">Nexteer Automotive</span> where
+              I specialized in the validation of electric power steering
+              systems.
             </p>
             <p>
               My goal is to work on innovative projects that make a{" "}
@@ -281,6 +282,17 @@ function About() {
 const experiences = [
   {
     company: "General Motors",
+    role: "Virtual Propulsion Engineer - Energy Model & Toolchain Development",
+    location: "Warren, MI",
+    period: "Jan 2026 – Sep 2026",
+    bullets: [
+      "Developed and enhanced vehicle energy and performance simulation tools, improving model fidelity, correlation accuracy, and data analysis workflows across propulsion systems.",
+      "Led a Design for Six Sigma (DFSS) Green Belt project to architect an AI-driven, backwards-facing EV simulation model in MATLAB/Simulink, accelerating simulation times by up to 240x compared to legacy models.",
+      "Enabled team efficiency by developing user-focused tools and improving usability, documentation, and workflows.",
+    ],
+  },
+  {
+    company: "General Motors",
     role: "Engineering Intern - Driveline Development & Integration",
     location: "Milford, MI",
     period: "May 2025 – Aug 2025",
@@ -296,7 +308,7 @@ const experiences = [
     location: "Saginaw, MI",
     period: "May 2024 – Aug 2024",
     bullets: [
-      "Developed an ignition test box for a Steer-by-Wire project, expanding test coverage and reliability.",
+      "Engineered and validated a custom ignition test box for a Steer-by-Wire system, managing physical board bring-up, debugging, and harness configuration to ensure comprehensive hardware test coverage.",
       "Analyzed OEM design, safety, and software requirements to strengthen feature-function mapping.",
       "Authored detailed work instructions to accelerate testing and knowledge transfer.",
     ],
