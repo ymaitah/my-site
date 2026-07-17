@@ -12,7 +12,11 @@ export default defineConfig({
       srcDirectory: "src",
       // Pre-render the (static) routes to HTML at build time so crawlers and
       // social scrapers get fully-rendered pages without executing JS.
-      prerender: { enabled: true, crawlLinks: true },
+      // crawlLinks stays OFF: this is a single page (nav is all in-page #
+      // anchors), and crawling would follow the PDF links and re-emit them
+      // through the text pipeline, corrupting the binaries. The index route
+      // is prerendered regardless; public/ assets are copied verbatim.
+      prerender: { enabled: true, crawlLinks: false },
     }),
     viteReact(),
   ],
